@@ -78,4 +78,4 @@ hora_ini = time()
 bubble_sort(nomes10000)
 hora_fim = time()
 print(nomes10000)    # Lista após ordenação
-print(f"Tempo gasto {(hora_fim - hora_ini) * 1000}ms\n")
+print(f"Tempo gasto {(hora_fim - hora_ini) * 1000}ms\n") 
