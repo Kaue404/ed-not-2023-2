@@ -5,16 +5,16 @@ def merge_sort(lista):
         No processo de ordenação, esse algoritmo "desmonta"
         a lista original, contendo N elementos, até obter
         N listas com apenas um elemento cada uma. Em seguida,
-        usando a técnica de mesclagem (merging), "remonta" a
+        usado a técnica de mesclagem (merging), "remonta" a
         lista, desta vez com os elementos já em ordem.
     """
     # PARTE 1: DIVISÃO DA LISTA ORIGINAL EM LISTAS MENORES
 
-    # Para que passa haver divisão da lista, esta deve ser
+    # Para que possa haver divisão da lista, esta deve ter
     # mais de um elemento
     if len(lista) > 1:
 
-        # Encotra a posição do meio da lista, para fazer a divisão
+        # Encontra a posição do meio da lista, para fazer a divisão
         # em duas metades
         meio = len(lista) // 2
 
@@ -23,12 +23,12 @@ def merge_sort(lista):
         # Tira uma cópia da segunda metade da lista
         sublista_dir = lista[meio:]
 
-        # Chamamos recursivamente a prória função para que ela
+        # Chamamos recursivamente a própria função para que ela
         # continue repartindo cada sublista em duas partes menores
         sublista_esq = merge_sort(sublista_esq)
         sublista_dir = merge_sort(sublista_dir)
 
-        #PARTE 2: REMONTAGEM DA LISTA, ORDENADAMENTE
+        # PARTE 2: REMONTAGEM DA LISTA, ORDENADAMENTE
 
         pos_esq = pos_dir = 0
         ordenada = []       # Lista vazia
@@ -36,25 +36,56 @@ def merge_sort(lista):
         # Compara os elementos das sublistas entre si e insere
         # na lista ordenada o menor dentre dois elementos
         while pos_esq < len(sublista_esq) and pos_dir < len(sublista_dir):
-
+            
             # O menor elemento está na sublista da esquerda
             if sublista_esq[pos_esq] < sublista_dir[pos_dir]:
                 # "Desce" o elemento da esquerda para a lista ordenada
                 ordenada.append(sublista_esq[pos_esq])
-                pos_esq += 1    #Incrementa a posição da esquerda
+                pos_esq += 1        # Incrementa a posição da esquerda
 
             # O menor elemento está na sublista da direita
             else:
-                # "Desce"o elemento da direita para a lista ordenada
+                # "Desce" o elemento da direita para a lista ordenada
                 ordenada.append(sublista_dir[pos_dir])
-                pos_dir += 1    # Incrementa a posição da direita
+                pos_dir += 1        # Incrementa a posição da direita
 
-            # Verificação da sobra
-            sobra = []
+        # Verificação da sobra
+        sobra = []
 
-            # Sobra à esquerda
-            if(pos_esq < pos_dir): sobra = sublista_esq[pos_esq:]
-            #Sobra à direita
-            else: sobra = sublista_dir[pos_dir:]
+        # Sobra à esquerda
+        if(pos_esq < pos_dir): sobra = sublista_esq[pos_esq:]
+        # Sobra à direita
+        else: sobra = sublista_dir[pos_dir:]
 
-            return ordenada + sobra
+        # O resultado final é a junção (concatenação) da lista
+        # ordenada com a sobra
+        return ordenada + sobra
+    
+    else:
+        return lista
+
+
+########################################################
+
+nums = [7, 5, 9, 0, 3, 4, 8, 1, 6, 2]
+
+nums_ord = merge_sort(nums)
+
+print(f"Lista original: {nums}")
+print(f"Lista ordenada: {nums_ord}")
+
+#######################################################################
+# TESTE COM O ARQUIVO DE 1M+ NOMES
+
+import sys
+sys.dont_write_bytecode = True #Impede a criação do cache
+
+#Importando a lista de nomes
+from data.nomes_desord import nomes
+from time import time
+
+hora_ini = time()
+merge_sort(nomes)
+hora_fim = time()
+print(nomes)    # Lista após ordenação
+print(f"Tempo gasto {(hora_fim - hora_ini) * 1000}ms\n") 
