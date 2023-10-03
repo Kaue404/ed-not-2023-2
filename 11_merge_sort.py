@@ -104,7 +104,7 @@ hora_fim = time()
 
 # Captura as informações do gasto de memória
 mem_atual, mem_pico = tracemalloc.get_traced_memory
-tracemalloc.stop()      # Termina a medição do consumo de memória
+tracemalloc.stop()      # Termina a medição do consumo de memória 
 
 print(nomes)    # Lista após ordenação
 print(f"Tempo gasto {(hora_fim - hora_ini) * 1000}ms\n") 
