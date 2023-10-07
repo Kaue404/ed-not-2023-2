@@ -86,7 +86,7 @@ print (f"Comparações: {comps}, trocas: {trocas}, passadas: {passd}")
 
 # TESTE COM O ARQUIVO DE 1M+ NOMES
 
-# import sys
+# import sys tracemalloc
 # sys.dont_write_bytecode = True #Impede a criação do cache
 
 # Importando a lista de nomes
@@ -95,9 +95,16 @@ print (f"Comparações: {comps}, trocas: {trocas}, passadas: {passd}")
 
 # nomes10000 = nomes[:10000]
 
+
+# tracemalloc.start()     # Inicia a medição do consumo de memória
 # hora_ini = time()
 # quick_sort(nomes)
+
+# Captura as informações do gasto de memória
+# mem_atual, mem_pico = tracemalloc.get_traced_memory
+# tracemalloc.stop()      # Termina a medição do consumo de memória 
 # hora_fim = time()
 # print(nomes)    # Lista após ordenação
 # print(f"Tempo gasto {(hora_fim - hora_ini) * 1000}ms\n") 
 # print (f"Comparações: {comps}, trocas: {trocas}, passadas: {passd}")
+# print(f"Pico de memória: { mem_pico / 1024 / 1024 } MB")
